@@ -1,0 +1,55 @@
+{% extends "account/base.html" %} {% load i18n %} {% load crispy_forms_tags %}
+{% block head_title %}{% translate "Sign In" %}{% endblock %} {% block inner %}
+<h1>{% translate "Sign In" %}</h1>
+<main class="form-signin">
+  <form method="POST" action="{% url "users:login" %}">
+  {% csrf_token %}
+    <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+
+    <div class="form-floating">
+      <input
+        type="email"
+        class="form-control"
+        id="id_username"
+        name="username"
+        placeholder="name@example.com"
+      />
+      <label for="id_username">Email address</label>
+      {% if form.username.errors %}
+      <div class="alert alert-danger text-center" role="alert">
+        <i class="fas fa-exclamation-triangle"></i>
+        <strong>{{ form.username.errors|striptags|safe }}</strong>
+        </span>
+      {% endif %}
+    </div>
+    <div class="form-floating">
+      <input
+        type="password"
+        class="form-control"
+        id="id_password"
+        name="password"
+        placeholder="Password"
+      />
+      <label for="id_password">Password</label>
+      {% if form.password.errors %}
+      <div class="alert alert-danger text-center" role="alert">
+        <i class="fas fa-exclamation-triangle"></i>
+        <strong>{{ form.password.errors|striptags|safe }}</strong>
+      </div>
+      {% endif %}
+    </div>
+    <div class="checkbox mb-3">
+      <label> <input type="checkbox" value="remember-me" disabled/> Remember me </label>
+    </div>
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+    <br /><br />
+    {% if form.errors %}
+        {% for error in form.non_field_errors %}
+            <div class="alert alert-danger">
+                <strong>{{ error|escape }}</strong>
+            </div>
+        {% endfor %}
+    {% endif %}
+  </form>
+</main>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {% block head_title %}
+    {% endblock head_title %}
+{% endblock title %}
+
+{% block main_base %}
+    <div class="container-fluid">
+        <div class="vh-100 row justify-content-center align-items-center">
+            <div class="col-sm-12 col-md-4">
+                {% block inner %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
